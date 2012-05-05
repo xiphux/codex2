@@ -1,0 +1,23 @@
+<h1>Listing fics</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fics.each do |fic| %>
+  <tr>
+    <td><%= fic.title %></td>
+    <td><%= link_to 'Show', fic %></td>
+    <td><%= link_to 'Edit', edit_fic_path(fic) %></td>
+    <td><%= link_to 'Destroy', fic, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Fic', new_fic_path %>
