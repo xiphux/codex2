@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505213745) do
+ActiveRecord::Schema.define(:version => 20120505215101) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(:version => 20120505213745) do
 
   create_table "genres", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "matchups", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
