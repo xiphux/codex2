@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505220706) do
+ActiveRecord::Schema.define(:version => 20120505221206) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -50,6 +50,11 @@ ActiveRecord::Schema.define(:version => 20120505220706) do
   end
 
   add_index "characters", ["series_id"], :name => "index_characters_on_series_id"
+
+  create_table "characters_matchups", :id => false, :force => true do |t|
+    t.integer "character_id"
+    t.integer "matchup_id"
+  end
 
   create_table "fics", :force => true do |t|
     t.string   "title"
