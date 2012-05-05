@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505220415) do
+ActiveRecord::Schema.define(:version => 20120505220706) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,11 @@ ActiveRecord::Schema.define(:version => 20120505220415) do
   create_table "fics_matchups", :id => false, :force => true do |t|
     t.integer "fic_id"
     t.integer "matchup_id"
+  end
+
+  create_table "fics_series", :id => false, :force => true do |t|
+    t.integer "fic_id"
+    t.integer "series_id"
   end
 
   create_table "genres", :force => true do |t|
