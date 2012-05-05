@@ -1,5 +1,7 @@
 Codex::Application.routes.draw do
-  resources :fics
+  resources :fics do
+  	resources :chapters
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

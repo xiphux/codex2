@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fic: 
+  number: 1
+  title: MyString
+  data: MyText
+  file: MyString
+  wrapped: false
+  padlines: false
+  views: 1
+
+two:
+  fic: 
+  number: 1
+  title: MyString
+  data: MyText
+  file: MyString
+  wrapped: false
+  padlines: false
+  views: 1

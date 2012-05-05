@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505154140) do
+ActiveRecord::Schema.define(:version => 20120505155719) do
+
+  create_table "chapters", :force => true do |t|
+    t.integer  "fic_id"
+    t.integer  "number"
+    t.string   "title"
+    t.text     "data"
+    t.string   "file"
+    t.boolean  "wrapped"
+    t.boolean  "padlines"
+    t.integer  "views"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "chapters", ["fic_id", "number"], :name => "index_chapters_on_fic_id_and_number", :unique => true
+  add_index "chapters", ["fic_id"], :name => "index_chapters_on_fic_id"
 
   create_table "fics", :force => true do |t|
     t.string   "title"
