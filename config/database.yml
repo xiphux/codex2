@@ -40,3 +40,13 @@ production:
   username: codex2
   password: codex2
   socket: /var/run/mysqld/mysqld.sock
+
+legacy:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: codex
+  pool: 5
+  username: codex
+  password: hzt2xJFcsfwLw56H
+  socket: /var/run/mysqld/mysqld.sock
