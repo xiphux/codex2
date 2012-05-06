@@ -1,23 +1,12 @@
-<h1>Listing fics</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @fics.each do |fic| %>
-  <tr>
-    <td><%= fic.title %></td>
-    <td><%= link_to 'Show', fic %></td>
-    <td><%= link_to 'Edit', edit_fic_path(fic) %></td>
-    <td><%= link_to 'Destroy', fic, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  <table>
+    <tr><td><%= link_to fic.title, fic =%> by <%= fic.authors.empty? ? "Unknown" : fic.authors.join(", ") =%></td></tr>
+    <tr><td><%= fic.series.empty? ? "Unknown" : fic.series.join(", ") =%> - <%= fic.genres.empty? ? "Unknown" : fic.genres.join(", ") =%> - Chapters: <%= fic.chapters.count =%> - Words:</td></tr>
+    <% if !fic.matchups.empty? %>
+    <tr><td><%= fic.matchups.join(", ") =%></td></tr>
+    <% end %>
+    <% if (fic.sequel != nil) || (fic.prequel != nil) || (fic.main_story != nil) || !fic.sidestories.empty? %>
+    <tr><td><%= "Prequel: " + fic.prequel.to_s if fic.prequel != nil =%><%= "Sequel: " + fic.sequel.to_s if fic.sequel != nil =%><%= "Sidestories: " + fic.sidestories.join(", ") if !fic.sidestories.empty? =%><%= "Sidestory to: " + fic.main_story.to_s if fic.main_story != nil =%></td></tr>
+    <% end %>
+  <table>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Fic', new_fic_path %>
