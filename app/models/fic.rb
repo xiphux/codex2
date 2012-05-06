@@ -11,6 +11,10 @@ class Fic < ActiveRecord::Base
   has_many :sidestories, :class_name => "Fic", :foreign_key => "main_story_id"
   belongs_to :main_story, :class_name => "Fic", :foreign_key => "main_story_id"
 
+  scope :with_series, lambda { |series| series.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_series WHERE series_id = ?)", series]} : {} }
+  scope :with_genre, lambda { |genre| genre.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_genres WHERE genre_id = ?)", genre]} : {} }
+  scope :with_matchup, lambda { |genre| genre.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_matchups WHERE matchup_id = ?)", genre]} : {} }
+
   def to_s
     self.title
   end

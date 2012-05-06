@@ -1,3 +1,61 @@
+<div style="float: left; width: 300px">
+ <% if @search_series != nil || @search_genres != nil || @search_matchups != nil %>
+ <strong>Current Search</strong>
+   <% if @search_series != nil %>
+   <br />Series:
+     <% @search_series.each do |series| %>
+     <%= link_to series, Marshal.load(Marshal.dump(params)).tap { |p| p["s"].count == 1 ? p.delete("s") : p["s"].delete(series.id.to_s) } =%><%= ", " unless series == @search_series.last =%>
+     <% end %>
+   <% end %>
+   <% if @search_genres != nil %>
+   <br />Genre:
+     <% @search_genres.each do |genre| %>
+     <%= link_to genre, Marshal.load(Marshal.dump(params)).tap { |p| p["g"].count == 1 ? p.delete("g") : p["g"].delete(genre.id.to_s) } =%><%= ", " unless genre == @search_genres.last =%>
+     <% end %>
+   <% end %>
+   <% if @search_matchups != nil %>
+   <br />Matchup:
+     <% @search_matchups.each do |matchup| %>
+     <%= link_to matchup, Marshal.load(Marshal.dump(params)).tap { |p| p["m"].count == 1 ? p.delete("m") : p["m"].delete(matchup.id.to_s) } =%><%= ", " unless matchup == @search_matchups.last =%>
+     <% end %>
+   <% end %>
+ <% end %>
+ <div>
+ <strong>Series</strong>
+ <% @series.each do |series| %>
+ <br />
+ <% if @search_series != nil && @search_series.include?(series) %>
+ <%= series =%>
+ <% else %>
+ <%= link_to series, params.merge({"s[]" => series.id}) =%>
+ <% end %>
+ <% end %>
+ </div>
+ <div>
+ <strong>Genre</strong>
+ <% @genres.each do |genre| %>
+ <br />
+ <% if @search_genres != nil && @search_genres.include?(genre) %>
+ <%= genre =%>
+ <% else %>
+ <%= link_to genre, params.merge({"g[]" => genre.id}) =%>
+ <% end %>
+ <% end %>
+ </div>
+ <div>
+ <strong>Matchup</strong>
+ <% @matchups.each do |matchup| %>
+ <br />
+ <% if @search_matchups != nil && @search_matchups.include?(matchup) %>
+ <%= matchup =%>
+ <% else %>
+ <%= link_to matchup, params.merge({"m[]" => matchup.id}) =%>
+ <% end %>
+ <% end %>
+ </div>
+</div>
+
+<div style="float: left;">
 <% @fics.each do |fic| %>
   <table>
     <tr><td><%= link_to fic.title, fic =%> by <%= fic.authors.empty? ? "Unknown" : fic.authors.join(", ") =%></td></tr>
@@ -10,3 +68,5 @@
     <% end %>
   <table>
 <% end %>
+</div>
+<div style="clear: both;"></div>
