@@ -14,4 +14,8 @@ class Fic < ActiveRecord::Base
   def to_s
     self.title
   end
+
+  def word_count
+    chapters.inject(0){ |sum, chap| sum + chap.word_count }
+  end
 end

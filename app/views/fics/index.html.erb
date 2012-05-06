@@ -1,7 +1,7 @@
 <% @fics.each do |fic| %>
   <table>
     <tr><td><%= link_to fic.title, fic =%> by <%= fic.authors.empty? ? "Unknown" : fic.authors.join(", ") =%></td></tr>
-    <tr><td><%= fic.series.empty? ? "Unknown" : fic.series.join(", ") =%> - <%= fic.genres.empty? ? "Unknown" : fic.genres.join(", ") =%> - Chapters: <%= fic.chapters.count =%> - Words:</td></tr>
+    <tr><td><%= fic.series.empty? ? "Unknown" : fic.series.join(", ") =%> - <%= fic.genres.empty? ? "Unknown" : fic.genres.join(", ") =%> - Chapters: <%= fic.chapters.count =%> - Words: <%= fic.word_count =%></td></tr>
     <% if !fic.matchups.empty? %>
     <tr><td><%= fic.matchups.join(", ") =%></td></tr>
     <% end %>
