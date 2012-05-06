@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506015424) do
+ActiveRecord::Schema.define(:version => 20120506042944) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(:version => 20120506015424) do
     t.integer  "fic_id"
     t.integer  "number"
     t.string   "title"
-    t.text     "data"
+    t.text     "data",       :limit => 2147483647
     t.string   "file"
     t.boolean  "wrapped"
     t.boolean  "padlines"
     t.integer  "views"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "chapters", ["fic_id", "number"], :name => "index_chapters_on_fic_id_and_number", :unique => true
