@@ -18,15 +18,19 @@ class Chapter < ActiveRecord::Base
     end
   end
 
+  def calculate_word_count
+    text_data = self.text
+    if text_data != nil then
+      wordcount = text_data.split.size
+    else
+      wordcount = 0
+    end
+  end
+
   def word_count
     wordcount = read_attribute(:word_count)
     if wordcount == nil then
-      text_data = self.text
-      if text_data != nil then
-        wordcount = text_data.split.size
-      else
-        wordcount = 0
-      end
+      wordcount = calculate_word_count
     end
     wordcount
   end

@@ -3,6 +3,9 @@ Codex::Application.routes.draw do
   	resources :chapters
   end
 
+  match "admin/update_word_counts" => "admin#update_word_counts", :via => :post
+  resources :admin
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
