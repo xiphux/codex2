@@ -1,24 +1,26 @@
 <div style="float: left; width: 300px">
  <% if @search_series != nil || @search_genres != nil || @search_matchups != nil %>
- <strong>Current Search</strong>
+   <div>
+   <strong>Current Search</strong> <%= link_to "[clear]", params.except(:s, :g, :m) =%>
    <% if @search_series != nil %>
    <br />Series:
      <% @search_series.each do |series| %>
-     <%= link_to series, Marshal.load(Marshal.dump(params)).tap { |p| p["s"].count == 1 ? p.delete("s") : p["s"].delete(series.id.to_s) } =%><%= ", " unless series == @search_series.last =%>
+     <%= link_to series, params[:s].count == 1 ? params.except(:s) : Marshal.load(Marshal.dump(params)).tap { |p| p[:s].delete(series.id.to_s) } =%><%= ", " unless series == @search_series.last =%>
      <% end %>
    <% end %>
    <% if @search_genres != nil %>
    <br />Genre:
      <% @search_genres.each do |genre| %>
-     <%= link_to genre, Marshal.load(Marshal.dump(params)).tap { |p| p["g"].count == 1 ? p.delete("g") : p["g"].delete(genre.id.to_s) } =%><%= ", " unless genre == @search_genres.last =%>
+     <%= link_to genre, params[:g].count == 1 ? params.except(:g) : Marshal.load(Marshal.dump(params)).tap { |p| p[:g].delete(genre.id.to_s) } =%><%= ", " unless genre == @search_genres.last =%>
      <% end %>
    <% end %>
    <% if @search_matchups != nil %>
    <br />Matchup:
      <% @search_matchups.each do |matchup| %>
-     <%= link_to matchup, Marshal.load(Marshal.dump(params)).tap { |p| p["m"].count == 1 ? p.delete("m") : p["m"].delete(matchup.id.to_s) } =%><%= ", " unless matchup == @search_matchups.last =%>
+     <%= link_to matchup, params[:m].count == 1 ? params.except(:m) : Marshal.load(Marshal.dump(params)).tap { |p| p[:m].delete(matchup.id.to_s) } =%><%= ", " unless matchup == @search_matchups.last =%>
      <% end %>
    <% end %>
+   </div>
  <% end %>
  <div>
  <strong>Series</strong>
