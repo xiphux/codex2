@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506042944) do
+ActiveRecord::Schema.define(:version => 20120507003721) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120506042944) do
     t.integer  "views"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.integer  "word_count"
   end
 
   add_index "chapters", ["fic_id", "number"], :name => "index_chapters_on_fic_id_and_number", :unique => true

@@ -1,6 +1,6 @@
 class Chapter < ActiveRecord::Base
   belongs_to :fic
-  attr_accessible :data, :file, :number, :padlines, :title, :views, :wrapped
+  attr_accessible :data, :file, :number, :padlines, :title, :wrapped, :word_count, :views
 
   def to_s
     if self.title != nil then
@@ -19,11 +19,15 @@ class Chapter < ActiveRecord::Base
   end
 
   def word_count
-    text_data = self.text
-    if text_data != nil then
-      text_data.split.size
-    else
-      0
+    wordcount = read_attribute(:word_count)
+    if wordcount == nil then
+      text_data = self.text
+      if text_data != nil then
+        wordcount = text_data.split.size
+      else
+        wordcount = 0
+      end
     end
+    wordcount
   end
 end
