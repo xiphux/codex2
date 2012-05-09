@@ -88,6 +88,11 @@ class FicsController < ApplicationController
   def show
     @fic = Fic.find(params[:id])
 
+    if @fic.chapters.count == 1 then
+      redirect_to fic_chapter_path(@fic, @fic.chapters.first)
+      return
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @fic }
