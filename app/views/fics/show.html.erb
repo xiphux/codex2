@@ -1,10 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @fic.title %>
-</p>
+<%= render(@fic) =%>
 
-
-<%= link_to 'Edit', edit_fic_path(@fic) %> |
-<%= link_to 'Back', fics_path %>
+<table>
+<tr>
+<th>Chapter</th>
+<th>Words</th>
+</tr>
+<% @fic.chapters.each do |chapter| %>
+<tr>
+<td><%= link_to chapter.title || "Chapter " + chapter.number, [@fic, chapter] =%></td>
+<td><%= chapter.word_count =%></td>
+</tr>
+<% end %>
+</table>

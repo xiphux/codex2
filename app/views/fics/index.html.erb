@@ -58,17 +58,6 @@
 </div>
 
 <div style="float: left;">
-<% @fics.each do |fic| %>
-  <table>
-    <tr><td><%= link_to fic.title, fic =%> by <%= fic.authors.empty? ? "Unknown" : fic.authors.join(", ") =%></td></tr>
-    <tr><td><%= fic.series.empty? ? "Unknown" : fic.series.join(", ") =%> - <%= fic.genres.empty? ? "Unknown" : fic.genres.join(", ") =%> - Chapters: <%= fic.chapters.count =%> - Words: <%= fic.word_count =%></td></tr>
-    <% if !fic.matchups.empty? %>
-    <tr><td><%= fic.matchups.join(", ") =%></td></tr>
-    <% end %>
-    <% if (fic.sequel != nil) || (fic.prequel != nil) || (fic.main_story != nil) || !fic.sidestories.empty? %>
-    <tr><td><%= "Prequel: " + fic.prequel.to_s if fic.prequel != nil =%><%= "Sequel: " + fic.sequel.to_s if fic.sequel != nil =%><%= "Sidestories: " + fic.sidestories.join(", ") if !fic.sidestories.empty? =%><%= "Sidestory to: " + fic.main_story.to_s if fic.main_story != nil =%></td></tr>
-    <% end %>
-  <table>
-<% end %>
+<%= render(@fics) || "No fics" =%>
 </div>
 <div style="clear: both;"></div>

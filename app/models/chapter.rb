@@ -34,4 +34,8 @@ class Chapter < ActiveRecord::Base
     end
     wordcount
   end
+
+  def to_param
+    number
+  end
 end
