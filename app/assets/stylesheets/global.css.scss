@@ -1,0 +1,89 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	overflow: auto;
+}
+
+a {
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+	&:visited {
+		text-decoration: none;
+	}
+}
+
+@for $i from 1 through 5 {
+
+	$name: nth((
+		"newspaper",
+		"novel",
+		"ebook",
+		"inverse",
+		"athelas"
+	), $i);
+
+	$color: nth((
+		#090000,
+		#161311,
+		#212126,
+		#cdd2d8,
+		#20292f
+	), $i);
+
+	$bgcolor: nth((
+		#fcfdf9,
+		#f1ebcf,
+		#e8e6e2,
+		#272c30,
+		#f5f5f5
+	), $i);
+
+	$linkcolor: nth((
+		#8a0000,
+		#8a0000,
+		#365084,
+		#28b3ed,
+		#1b6ac1
+	), $i);
+
+	$fonts: nth((
+		(Georgia, "Times New Roman", serif),
+		(Cambria, "Hoefler Text", Georgia, "Times New Roman", serif),
+		(Corbel, "Helvetica Neue", Arial, "sans-serif"),
+		("minion-pro-1", "minion-pro-2", Palatino, Georgia, "Times New Roman", serif),
+		("athelas-1", "athelas-2", serif)
+	), $i);
+
+	$labelcolor: nth((
+		#5d5d52,
+		#5d5d52,
+		#5d5d52,
+		#95a5b5,
+		#5d5d52
+	), $i);
+
+	body.#{$name}_theme {
+		color: $color;
+		background-color: $bgcolor;
+		font-family: $fonts;
+
+		a {
+			color: $linkcolor;
+			&:hover {
+				color: $linkcolor;
+			}
+			&:visited {
+				color: $linkcolor;
+			}
+		}
+
+		.label {
+			color: $labelcolor;
+		}
+
+	}
+
+}

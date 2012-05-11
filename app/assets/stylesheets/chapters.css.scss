@@ -1,27 +1,32 @@
 // Place all the styles related to the Chapters controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "global.css.scss";
+
 .readnav {
 	width: 100%;
 	text-align: center;
-}
+	padding: 4px 2px 4px 2px;
 
-.readnav .readnavprev {
-	text-align: left;
-	position: absolute;
-	left: 0;
-	top: 0;
-}
+	.readnavprev {
+		text-align: left;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
 
-.readnav .readnavinfo {
-	display: inline;
-}
+	.readnavinfo {
+		display: inline;
+	}
 
-.readnav .readnavnext {
-	text-align: right;
-	position: absolute;
-	right: 0;
-	top: 0;
+	.readnavnext {
+		text-align: right;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
 }
 
 .bottomnav {
@@ -33,8 +38,67 @@
 
 .readtext {
 	white-space: pre-wrap;
+	padding: 0px 96px 0px 96px;
+	line-height: 1.7em;
+	font-size: 1.2em;
 }
 
 .bottompadding {
 	height: 40px;
+}
+
+.emphasis {
+	font-style: italic;
+}
+
+.breakline {
+	margin: 24px 0px 24px 0px;
+}
+
+@for $i from 1 through 5 {
+
+	$name: nth((
+		"newspaper",
+		"novel",
+		"ebook",
+		"inverse",
+		"athelas"
+	), $i);
+
+	$navcolor: nth((
+		#f6f6f2,
+		#e6e0c3,
+		#dbd9d5,
+		#21252a,
+		#ececec
+	), $i);
+
+	$bordercolor: nth((
+		#d9d9d5,
+		#cac6ac,
+		#c1bebb,
+		#1e2126,
+		#cfcfcf
+	), $i);
+
+	body.#{$name}_theme {
+
+		.readnav {
+			background-color: $navcolor;
+		}
+
+		.topnav {
+			border-bottom: 2px solid $bordercolor;
+		}
+
+		.bottomnav {
+			border-top: 2px solid $bordercolor;
+		}
+
+		.breakline {
+			border-top: 1px solid $bordercolor;
+		}
+
+	}
+
 }

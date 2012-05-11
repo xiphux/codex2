@@ -9,7 +9,7 @@
 </tr>
 <% @fic.chapters.each do |chapter| %>
 <tr>
-<td><%= link_to chapter.title || "Chapter " + chapter.number, [@fic, chapter] =%></td>
+<td><%= link_to chapter, [@fic, chapter] =%></td>
 <td><%= chapter.word_count =%></td>
 </tr>
 <% end %>

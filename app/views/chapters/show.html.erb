@@ -9,9 +9,10 @@
   <span class="readnavinfo">
   <%= @fic.title =%> <span class="label">by</span> <%= @fic.authors.join(", ") || "Unknown" =%>
   <% if @fic.chapters.count > 1 %>
-    | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c.title, c.number ] }, { :selected => @chapter.number }, { :id => "topchapterselect" }) =%>
+  | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c, c.number ] }, { :selected => @chapter.number }, { :id => "topchapterselect" }) =%>
     <%= hidden_field(:fic, :id) =%>
   <% end %>
+  | Theme: <%= select("theme", "key", @themes.collect { |key, name| [ name, key ] }, { :selected => @themecookie }, { :id => "themeselect" }) =%>
   </span>
 
   <% if @chapter != @fic.chapters.last %>
@@ -41,7 +42,7 @@
   <span class="readnavinfo">
   <%= @fic.title =%> <span class="label">by</span> <%= @fic.authors.join(", ") || "Unknown" =%>
   <% if @fic.chapters.count > 1 %>
-    | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c.title, c.number ] }, { :selected => @chapter.number }, { :id => "bottomchapterselect" }) =%>
+    | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c, c.number ] }, { :selected => @chapter.number }, { :id => "bottomchapterselect" }) =%>
   <% end %>
   </span>
 

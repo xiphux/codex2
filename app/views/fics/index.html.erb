@@ -1,4 +1,4 @@
-<div style="float: left; width: 300px">
+<div style="float: left; width: 20%">
  <% if @search_series != nil || @search_genres != nil || @search_matchups != nil %>
    <div>
    <strong>Current Search</strong> <%= link_to "[clear]", params.except(:s, :g, :m) =%>
@@ -57,7 +57,7 @@
  </div>
 </div>
 
-<div style="float: left;">
+<div style="float: left; width: 80%">
 <%= render(@fics) || "No fics" =%>
 </div>
 <div style="clear: both;"></div>
