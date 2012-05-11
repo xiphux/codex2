@@ -1,63 +1,93 @@
 <div class="ficfilters">
  <% if @search_series != nil || @search_genres != nil || @search_matchups != nil %>
-   <div>
+   <div class="currentsearch">
    <strong>Current Search</strong> <%= link_to "[clear]", params.except(:s, :g, :m) =%>
+   <div class="currentsearchparameters">
    <% if @search_series != nil %>
-   <br />Series:
+     <div>
+     Series:
      <% @search_series.each do |series| %>
      <%= link_to series, params[:s].count == 1 ? params.except(:s) : Marshal.load(Marshal.dump(params)).tap { |p| p[:s].delete(series.id.to_s) } =%><%= ", " unless series == @search_series.last =%>
      <% end %>
+     </div>
    <% end %>
    <% if @search_genres != nil %>
-   <br />Genre:
+     <div>
+     Genre:
      <% @search_genres.each do |genre| %>
      <%= link_to genre, params[:g].count == 1 ? params.except(:g) : Marshal.load(Marshal.dump(params)).tap { |p| p[:g].delete(genre.id.to_s) } =%><%= ", " unless genre == @search_genres.last =%>
      <% end %>
+     </div>
    <% end %>
    <% if @search_matchups != nil %>
-   <br />Matchup:
+     <div>
+     Matchup:
      <% @search_matchups.each do |matchup| %>
      <%= link_to matchup, params[:m].count == 1 ? params.except(:m) : Marshal.load(Marshal.dump(params)).tap { |p| p[:m].delete(matchup.id.to_s) } =%><%= ", " unless matchup == @search_matchups.last =%>
      <% end %>
+     </div>
    <% end %>
    </div>
+   </div>
  <% end %>
- <div>
- <strong>Series</strong>
- <% @series.each do |series| %>
- <br />
- <% if @search_series != nil && @search_series.include?(series) %>
- <%= series =%>
- <% else %>
- <%= link_to series, params.merge({"s[]" => series.id}) =%>
- <% end %>
- <% end %>
+ <strong>Filter by:</strong>
+ <div class="searchfilters">
+ <div class="searchtype">
+   <div class="searchtypename">
+     Series
+   </div>
+   <div class="searchtypevalues">
+     <% @series.each do |series| %>
+       <% if series != @series.first %>
+         <br />
+       <% end %>
+       <% if @search_series != nil && @search_series.include?(series) %>
+         <%= series =%>
+       <% else %>
+         <%= link_to series, params.merge({"s[]" => series.id}) =%>
+       <% end %>
+     <% end %>
+   </div>
  </div>
- <div>
- <strong>Genre</strong>
- <% @genres.each do |genre| %>
- <br />
- <% if @search_genres != nil && @search_genres.include?(genre) %>
- <%= genre =%>
- <% else %>
- <%= link_to genre, params.merge({"g[]" => genre.id}) =%>
- <% end %>
- <% end %>
+ <div class="searchtype">
+   <div class="searchtypename">
+     Genre
+   </div>
+   <div class="searchtypevalues">
+     <% @genres.each do |genre| %>
+       <% if genre != @genres.first %>
+         <br />
+       <% end %>
+       <% if @search_genres != nil && @search_genres.include?(genre) %>
+         <%= genre =%>
+       <% else %>
+         <%= link_to genre, params.merge({"g[]" => genre.id}) =%>
+       <% end %>
+     <% end %>
+   </div>
  </div>
- <div>
- <strong>Matchup</strong>
- <% @matchups.each do |matchup| %>
- <br />
- <% if @search_matchups != nil && @search_matchups.include?(matchup) %>
- <%= matchup =%>
- <% else %>
- <%= link_to matchup, params.merge({"m[]" => matchup.id}) =%>
- <% end %>
- <% end %>
+ <div class="searchtype">
+   <div class="searchtypename">
+     Matchup
+   </div>
+   <div class="searchtypevalues">
+     <% @matchups.each do |matchup| %>
+       <% if matchup != @matchups.first %>
+         <br />
+       <% end %>
+       <% if @search_matchups != nil && @search_matchups.include?(matchup) %>
+         <%= matchup =%>
+       <% else %>
+         <%= link_to matchup, params.merge({"m[]" => matchup.id}) =%>
+       <% end %>
+     <% end %>
+   </div>
+ </div>
  </div>
 </div>
 
 <div class="ficlisting">
-<%= render(@fics) || "No fics" =%>
+  <%= render(@fics) || "No fics" =%>
 </div>
+
 <div class="clear"></div>
