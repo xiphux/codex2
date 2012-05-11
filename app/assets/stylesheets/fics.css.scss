@@ -3,3 +3,57 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "global.css.scss";
+
+.ficfilters {
+	float: left;
+	width: 20%;
+	padding: 5px 5px 0px 5px;
+}
+
+.ficlisting {
+	float: left;
+	width: 78%;
+	padding: 5px 5px 0px 5px;
+}
+
+.clear {
+	clear: both;
+}
+
+.fic {
+	padding: 5px 0px 5px 0px;
+
+	.ficinfo {
+		padding-left: 10px;
+	}
+}
+
+@for $i from 1 through 5 {
+
+	$name: nth((
+		"newspaper",
+		"novel",
+		"ebook",
+		"inverse",
+		"athelas"
+	), $i);
+
+	$ficinfocolor: nth((
+		#5d5d52,
+		#5d5d52,
+		#5d5d52,
+		#95a5b5,
+		#5d5d52
+	), $i);
+
+	body.#{$name}_theme {
+
+		.fic {
+			.ficinfo {
+				color: $ficinfocolor;
+			}
+		}
+
+	}
+
+}
