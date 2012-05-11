@@ -1,1 +1,55 @@
+<div class="readnav topnav">
+
+  <% if @chapter != @fic.chapters.first %>
+  <span class="readnavprev">
+    <%= link_to "< prev", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)-1]] =%>
+  </span>
+  <% end %>
+
+  <span class="readnavinfo">
+  <%= @fic.title =%> <span class="label">by</span> <%= @fic.authors.join(", ") || "Unknown" =%>
+  <% if @fic.chapters.count > 1 %>
+    | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c.title, c.number ] }, { :selected => @chapter.number }, { :id => "topchapterselect" }) =%>
+    <%= hidden_field(:fic, :id) =%>
+  <% end %>
+  </span>
+
+  <% if @chapter != @fic.chapters.last %>
+  <span class="readnavnext">
+    <%= link_to "next >", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)+1]] =%>
+  </span>
+  <% end %>
+
+</div>
+
+<div class="readtext">
 <%= format_text(@chapter.text, {:unwrap => @chapter.wrapped, :padlines => @chapter.padlines}) =%>
+</div>
+
+<div class="bottompadding">
+</div>
+
+<% if @fic.chapters.count > 1 %>
+<div class="readnav bottomnav">
+
+  <% if @chapter != @fic.chapters.first %>
+  <span class="readnavprev">
+    <%= link_to "< prev", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)-1]] =%>
+  </span>
+  <% end %>
+
+  <span class="readnavinfo">
+  <%= @fic.title =%> <span class="label">by</span> <%= @fic.authors.join(", ") || "Unknown" =%>
+  <% if @fic.chapters.count > 1 %>
+    | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c.title, c.number ] }, { :selected => @chapter.number }, { :id => "bottomchapterselect" }) =%>
+  <% end %>
+  </span>
+
+  <% if @chapter != @fic.chapters.last %>
+  <span class="readnavnext">
+    <%= link_to "next >", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)+1]] =%>
+  </span>
+  <% end %>
+
+</div>
+<% end %>

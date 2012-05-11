@@ -101,7 +101,7 @@ module ChaptersHelper
     formatted = sanitize(formatted, :tags => %w(div span sup))
 
     # convert line breaks to html breaks
-    formatted = simple_format(formatted, {}, :sanitize => false)
+    #formatted = simple_format(formatted, {}, :sanitize => false)
 
     # return flagged as html safe
     formatted.html_safe

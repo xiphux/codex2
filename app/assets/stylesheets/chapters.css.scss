@@ -1,3 +1,40 @@
 // Place all the styles related to the Chapters controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.readnav {
+	width: 100%;
+	text-align: center;
+}
+
+.readnav .readnavprev {
+	text-align: left;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.readnav .readnavinfo {
+	display: inline;
+}
+
+.readnav .readnavnext {
+	text-align: right;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.bottomnav {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 5;
+}
+
+.readtext {
+	white-space: pre-wrap;
+}
+
+.bottompadding {
+	height: 40px;
+}
