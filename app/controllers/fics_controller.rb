@@ -97,13 +97,13 @@ class FicsController < ApplicationController
 
       @series.sort_by! { |s| s.title }
       @genres.sort_by! { |g| g.name }
-      @matchups.sort_by! { |m| matchup.to_s }
+      @matchups.sort_by! { |m| m.name_without_series }
 
     else
 
       @series = Series.order('title')
       @genres = Genre.order('name')
-      @matchups = Matchup.all.sort_by { |m| matchup.to_s }
+      @matchups = Matchup.all.sort_by { |m| m.name_without_series }
 
     end
 
