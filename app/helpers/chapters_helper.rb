@@ -1,7 +1,7 @@
 module ChaptersHelper
 
   def compact_blank_lines(text)
-    text.gsub(/([^\n])(\n\s*){2,}\n(\s*[^\n])/, "\1\n\n\3")
+    text.gsub(/([^\n])(\n\s*){2,}\n(\s*[^\n])/) { |match| $1 + "\n\n" + $3 }
   end
 
   def unwrap(text)
@@ -15,7 +15,7 @@ module ChaptersHelper
     content_line_count = 0
 
     lines.each do |line|
-      spaced_line = line.sub(/^ {2,}([^ ].*)$/, "\t\1")
+      spaced_line = line.sub(/^ {2,}([^ ].*)$/) { |match| "\t" + $1 }
 
       indented_line_count += 1 if spaced_line =~ /^\t/
 
@@ -40,16 +40,16 @@ module ChaptersHelper
     elsif (indented_line_count / content_line_count) > 0.20 then
       # text appears to have a number of indented lines
       # try to use indents to find paragraphs
-      unwrapped_text = text.gsub(/ *\n(\S)/, " \1")
+      unwrapped_text = text.gsub(/ *\n(\S)/) { |match| " " + $1 }
     elsif (((line_count - content_line_count) / line_count) > 0.10) then
       # text appears to have a number of blank lines
       # try to use blank lines to find paragraphs
-      unwrapped_text = text.gsub(/([^\n]) *\n([^\r\s])/, "\1 \2")
+      unwrapped_text = text.gsub(/([^\n]) *\n([^\r\s])/) { |match| $1 + " " + $2 }
     elsif (average_length > 1) then
       # try to unwrap by guessing the width of lines
       regex = Regexp.new("([^\n]{" + average_length.to_i.to_s + ",})\n")
       unwrapped_text = text.gsub(regex) { |match| $1 }
-      unwrapped_text = unwrapped_text.gsub(/([\w,]) {2,}([\w,])/, "\1 \2")
+      unwrapped_text = unwrapped_text.gsub(/([\w,]) {2,}([\w,])/) { |match| $1 + " " + $2 }
     end
 
     unwrapped_text
@@ -88,7 +88,7 @@ module ChaptersHelper
 
     # pad dense text with extra space
     if options[:padlines] == true then
-      formatted.gsub!(/([^\w\s,]) *\n([A-Z\t\"]| {3,})/, "\1\n\n\2")
+      formatted.gsub!(/([^\w\s,]) *\n([A-Z\t\"]| {3,})/) { |match| $1 + "\n\n" + $2 }
     end
 
     # compact extra whitespace lines
