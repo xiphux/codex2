@@ -42,21 +42,9 @@ class FicsController < ApplicationController
       # keyword search
       if (params[:search] && !params[:search].blank?) then
 
-      	# first find fics matching all keywords
-	title_fics = Fic.scoped
+	keyword_fics = Fic.scoped
 	for keyword in params[:search].split(' ') do
-	  title_fics = title_fics.with_keyword(keyword)
-	end
-
-	keyword_fics = title_fics
-
-	# now find authors matching all keywords
-	authors = Author.scoped
-	for keyword in params[:search].split(' ') do
-	  authors = authors.with_keyword(keyword)
-	end
-	for author in authors do
-	  keyword_fics = keyword_fics | author.fics
+	  keyword_fics = keyword_fics.with_keyword_or_author(keyword)
 	end
 
       end

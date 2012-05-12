@@ -15,6 +15,7 @@ class Fic < ActiveRecord::Base
   scope :with_genre, lambda { |genre| genre.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_genres WHERE genre_id = ?)", genre]} : {} }
   scope :with_matchup, lambda { |matchup| matchup.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_matchups WHERE matchup_id = ?)", matchup]} : {} }
   scope :with_keyword, lambda { |keyword| keyword.present? ? {:conditions => ["fics.title LIKE ?", "%" + keyword + "%"]} : {} }
+  scope :with_keyword_or_author, lambda { |keyword| keyword.present? ? {:conditions => ["fics.title LIKE ? OR fics.id in (SELECT fic_id FROM authors_fics LEFT JOIN authors ON authors_fics.author_id=authors.id WHERE authors.name LIKE ?)", "%" + keyword + "%", "%" + keyword + "%"]} : {} }
 
   def to_s
     self.title
