@@ -7,30 +7,68 @@ class FicsController < ApplicationController
     @search_genres = nil
     @search_matchups = nil
 
-    if params[:s] || params[:g] || params[:m] then
-      @fics = Fic.scoped
-      if params[:s] then
-        for series_id in params[:s] do
-	  @fics = @fics.with_series(series_id)
-	  @search_series = [] if @search_series == nil
-	  @search_series.push(Series.find(series_id))
-	end
+    if params[:s] || params[:g] || params[:m] || (params[:search] && !params[:search].blank?) then
+
+      filter_fics = nil
+      keyword_fics = nil
+
+      # filter search
+      if params[:s] || params[:g] || params[:m] then
+        filter_fics = Fic.scoped
+        if params[:s] then
+          for series_id in params[:s] do
+	    filter_fics = filter_fics.with_series(series_id)
+	    @search_series = [] if @search_series == nil
+	    @search_series.push(Series.find(series_id))
+	  end
+        end
+        if params[:g] then
+          for genre_id in params[:g] do
+	    filter_fics = filter_fics.with_genre(genre_id)
+	    @search_genres = [] if @search_genres == nil
+	    @search_genres.push(Genre.find(genre_id))
+	  end
+        end
+        if params[:m] then
+          for matchup_id in params[:m] do
+	    filter_fics = filter_fics.with_matchup(matchup_id)
+	    @search_matchups = [] if @search_matchups == nil
+	    @search_matchups.push(Matchup.find(matchup_id))
+	  end
+        end
+        filter_fics = filter_fics.order('title')
       end
-      if params[:g] then
-        for genre_id in params[:g] do
-	  @fics = @fics.with_genre(genre_id)
-	  @search_genres = [] if @search_genres == nil
-	  @search_genres.push(Genre.find(genre_id))
+
+      # keyword search
+      if (params[:search] && !params[:search].blank?) then
+
+      	# first find fics matching all keywords
+	title_fics = Fic.scoped
+	for keyword in params[:search].split(' ') do
+	  title_fics = title_fics.with_keyword(keyword)
 	end
-      end
-      if params[:m] then
-        for matchup_id in params[:m] do
-	  @fics = @fics.with_matchup(matchup_id)
-	  @search_matchups = [] if @search_matchups == nil
-	  @search_matchups.push(Matchup.find(matchup_id))
+
+	keyword_fics = title_fics
+
+	# now find authors matching all keywords
+	authors = Author.scoped
+	for keyword in params[:search].split(' ') do
+	  authors = authors.with_keyword(keyword)
 	end
+	for author in authors do
+	  keyword_fics = keyword_fics | author.fics
+	end
+
       end
-      @fics = @fics.order('title')
+
+      if filter_fics != nil && keyword_fics != nil then
+        @fics = filter_fics & keyword_fics
+      elsif filter_fics != nil then
+        @fics = filter_fics
+      elsif keyword_fics != nil then
+        @fics = keyword_fics
+      end
+
     else
       @fics = Fic.order('title')
     end

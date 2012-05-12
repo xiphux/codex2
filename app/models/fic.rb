@@ -13,7 +13,8 @@ class Fic < ActiveRecord::Base
 
   scope :with_series, lambda { |series| series.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_series WHERE series_id = ?)", series]} : {} }
   scope :with_genre, lambda { |genre| genre.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_genres WHERE genre_id = ?)", genre]} : {} }
-  scope :with_matchup, lambda { |genre| genre.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_matchups WHERE matchup_id = ?)", genre]} : {} }
+  scope :with_matchup, lambda { |matchup| matchup.present? ? {:conditions => ["fics.id in (SELECT fic_id FROM fics_matchups WHERE matchup_id = ?)", matchup]} : {} }
+  scope :with_keyword, lambda { |keyword| keyword.present? ? {:conditions => ["fics.title LIKE ?", "%" + keyword + "%"]} : {} }
 
   def to_s
     self.title
