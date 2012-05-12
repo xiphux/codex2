@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #= require jquery
+#= require global
 $ ->
   $('.ficfilters .searchtype').each (index, element) ->
     searchtypename = $(this).find('.searchtypename')

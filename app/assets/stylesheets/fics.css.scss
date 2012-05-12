@@ -4,37 +4,47 @@
 
 @import "global.css.scss";
 
-.ficfilters {
+.sidebar {
+
 	float: left;
 	width: 20%;
-	padding: 5px 5px 0px 5px;
 
-	.currentsearch {
-		padding: 5px 0px 5px 0px;
+	.ficfilters {
 
-		.currentsearchparameters {
+		padding: 5px 5px 5px 5px;
+
+		.currentsearch {
+			padding: 5px 0px 5px 0px;
+
+			.currentsearchparameters {
+				padding-left: 5px;
+			}
+
+		}
+
+		.searchfilters {
 			padding-left: 5px;
 		}
 
-	}
+		.searchtype {
+			padding: 5px 0px 5px 0px;
 
-	.searchfilters {
-		padding-left: 5px;
-	}
+			.searchtypevalues {
+				padding-left: 10px;
+			}
 
-	.searchtype {
-		padding: 5px 0px 5px 0px;
-
-		.searchtypevalues {
-			padding-left: 10px;
 		}
 
+	}
+
+	.options {
+		padding: 5px 5px 5px 5px;
 	}
 
 }
 
-.ficlisting {
-	float: left;
+.main {
+	float: right;
 	width: 78%;
 	padding: 5px 5px 0px 5px;
 }
@@ -69,12 +79,32 @@
 		#5d5d52
 	), $i);
 
+	$bordercolor: nth((
+		#d9d9d5,
+		#cac6ac,
+		#c1bebb,
+		#1e2126,
+		#cfcfcf
+	), $i);
+
 	body.#{$name}_theme {
 
 		.fic {
 			.ficinfo {
 				color: $ficinfocolor;
 			}
+		}
+
+		.sidebar {
+			border-right: 1px solid $bordercolor;
+			border-bottom: 1px solid $bordercolor;
+
+			.options {
+				border-top: 1px solid $bordercolor;
+			}
+		}
+
+		.main {
 		}
 
 	}

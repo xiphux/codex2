@@ -1,3 +1,5 @@
+<div class="container">
+<div class="sidebar">
 <div class="ficfilters">
  <% if @search_series != nil || @search_genres != nil || @search_matchups != nil %>
    <div class="currentsearch">
@@ -104,8 +106,12 @@
  </div>
  </div>
 </div>
+<div class="options">
+Theme: <%= select("theme", "key", @themes.collect { |key, name| [ name, key ] }, { :selected => @themecookie }, { :id => "themeselect" }) =%>
+</div>
+</div>
 
-<div class="ficlisting">
+<div class="main">
   <% if @fics && @fics.count > 0 %>
     <%= render(@fics) =%>
   <% elsif params[:s] || params[:g] || params[:m] || (params[:search] && !params[:search].blank?) %>
@@ -114,5 +120,3 @@
     Select a criteria to begin
   <% end %>
 </div>
-
-<div class="clear"></div>
