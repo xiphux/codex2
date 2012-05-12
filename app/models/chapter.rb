@@ -1,6 +1,7 @@
 class Chapter < ActiveRecord::Base
   belongs_to :fic
   attr_accessible :data, :file, :number, :padlines, :title, :wrapped, :word_count, :views
+  default_scope select((column_names - ['data']).map { |column_name| "`#{table_name}`.`#{column_name}`"})
 
   def title
     fic_title = read_attribute(:title)
@@ -29,14 +30,6 @@ class Chapter < ActiveRecord::Base
     else
       wordcount = 0
     end
-  end
-
-  def word_count
-    wordcount = read_attribute(:word_count)
-    if wordcount == nil then
-      wordcount = calculate_word_count
-    end
-    wordcount
   end
 
   def to_param
