@@ -22,6 +22,6 @@ class Fic < ActiveRecord::Base
   end
 
   def word_count
-    chapters.inject(0){ |sum, chap| sum + chap.word_count }
+    Chapter.sum(:word_count, :conditions => ["fic_id = ?", id])
   end
 end
