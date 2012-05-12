@@ -18,7 +18,21 @@
   <% end %>
   <% if (fic.sequel != nil) || (fic.prequel != nil) || (fic.main_story != nil) || !fic.sidestories.empty? %>
   <div class="ficinfo">
-    <%= "Prequel: " + fic.prequel.to_s if fic.prequel != nil =%><%= "Sequel: " + fic.sequel.to_s if fic.sequel != nil =%><%= "Sidestories: " + fic.sidestories.join(", ") if !fic.sidestories.empty? =%><%= "Sidestory to: " + fic.main_story.to_s if fic.main_story != nil =%>
+    <% if fic.prequel != nil %>
+    Prequel: <%= link_to fic.prequel.to_s, fic.prequel =%>
+    <% end %>
+    <% if fic.sequel != nil %>
+    Sequel: <%= link_to fic.sequel.to_s, fic.sequel =%>
+    <% end %>
+    <% if !fic.sidestories.empty? %>
+      Sidestories:
+      <% fic.sidestories.each do |sidestory| %>
+        <%= link_to sidestory.to_s, sidestory =%><%= ", " if sidestory != fic.sidestories.last %>
+      <% end %>
+    <% end %>
+    <% if fic.main_story != nil %>
+    Sidestory to: <%= link_to fic.main_story.to_s, fic.main_story =%>
+    <% end %>
   </div>
   <% end %>
 </div>
