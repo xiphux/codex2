@@ -6,6 +6,8 @@ Codex::Application.routes.draw do
   match "admin/update_word_counts" => "admin#update_word_counts", :via => :post
   resources :admin
 
+  root :to => 'fics#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
