@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507003721) do
+ActiveRecord::Schema.define(:version => 20120512040754) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20120507003721) do
     t.integer "author_id"
     t.integer "fic_id"
   end
+
+  add_index "authors_fics", ["fic_id", "author_id"], :name => "index_authors_fics_on_fic_id_and_author_id", :unique => true
 
   create_table "chapters", :force => true do |t|
     t.integer  "fic_id"
@@ -57,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20120507003721) do
     t.integer "matchup_id"
   end
 
+  add_index "characters_matchups", ["character_id", "matchup_id"], :name => "index_characters_matchups_on_character_id_and_matchup_id", :unique => true
+
   create_table "fics", :force => true do |t|
     t.string   "title"
     t.datetime "created_at",    :null => false
@@ -70,15 +74,21 @@ ActiveRecord::Schema.define(:version => 20120507003721) do
     t.integer "genre_id"
   end
 
+  add_index "fics_genres", ["fic_id", "genre_id"], :name => "index_fics_genres_on_fic_id_and_genre_id", :unique => true
+
   create_table "fics_matchups", :id => false, :force => true do |t|
     t.integer "fic_id"
     t.integer "matchup_id"
   end
 
+  add_index "fics_matchups", ["fic_id", "matchup_id"], :name => "index_fics_matchups_on_fic_id_and_matchup_id", :unique => true
+
   create_table "fics_series", :id => false, :force => true do |t|
     t.integer "fic_id"
     t.integer "series_id"
   end
+
+  add_index "fics_series", ["fic_id", "series_id"], :name => "index_fics_series_on_fic_id_and_series_id", :unique => true
 
   create_table "genres", :force => true do |t|
     t.string   "name"
