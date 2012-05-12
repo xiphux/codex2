@@ -202,6 +202,7 @@ class LegacyChapter < ActiveRecord::Base
   def migrate!
     chapter = Chapter.new :number => self.num, :title => self.title, :file => self.file, :data => self.data, :wrapped => self.wrapped, :padlines => self.padlines, :views => self.views
     chapter.id = self.id
+    chapter.word_count = chapter.calculate_word_count
 
     if self.fic != nil
       chapter.fic = Fic.find(self.fic)
