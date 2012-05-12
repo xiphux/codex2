@@ -57,8 +57,6 @@ class FicsController < ApplicationController
         @fics = keyword_fics
       end
 
-    else
-      @fics = Fic.order('title')
     end
 
     @series = []
@@ -70,34 +68,44 @@ class FicsController < ApplicationController
     @matchups = []
     matchup_hash = {}
 
-    for fic in @fics
+    if @fics then
 
-      for series in fic.series
-        if !series_hash.has_key?(series.id)
-	  series_hash[series.id] = 1
-	  @series.push(series)
-	end
+      for fic in @fics
+
+        for series in fic.series
+          if !series_hash.has_key?(series.id)
+	    series_hash[series.id] = 1
+	    @series.push(series)
+	  end
+        end
+
+        for genre in fic.genres
+          if !genre_hash.has_key?(genre.id)
+	    genre_hash[genre.id] = 1
+	    @genres.push(genre)
+	  end
+        end
+
+        for matchup in fic.matchups
+          if !matchup_hash.has_key?(matchup.id)
+	    matchup_hash[matchup.id] = 1
+	    @matchups.push(matchup)
+	  end
+        end
+
       end
 
-      for genre in fic.genres
-        if !genre_hash.has_key?(genre.id)
-	  genre_hash[genre.id] = 1
-	  @genres.push(genre)
-	end
-      end
+      @series.sort_by! { |s| s.title }
+      @genres.sort_by! { |g| g.name }
+      @matchups.sort_by! { |m| matchup.to_s }
 
-      for matchup in fic.matchups
-        if !matchup_hash.has_key?(matchup.id)
-	  matchup_hash[matchup.id] = 1
-	  @matchups.push(matchup)
-	end
-      end
+    else
+
+      @series = Series.order('title')
+      @genres = Genre.order('name')
+      @matchups = Matchup.all.sort_by { |m| matchup.to_s }
 
     end
-
-    @series.sort_by! { |s| s.title }
-    @genres.sort_by! { |g| g.name }
-    @matchups.sort_by! { |m| matchup.to_s }
 
     @search_series.sort_by! { |s| s.title } if @search_series != nil
     @search_genres.sort_by! { |g| g.name } if @search_genres != nil

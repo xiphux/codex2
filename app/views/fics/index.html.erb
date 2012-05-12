@@ -106,7 +106,13 @@
 </div>
 
 <div class="ficlisting">
-  <%= render(@fics) || "No fics" =%>
+  <% if @fics && @fics.count > 0 %>
+    <%= render(@fics) =%>
+  <% elsif params[:s] || params[:g] || params[:m] || (params[:search] && !params[:search].blank?) %>
+    No matching fics
+  <% else %>
+    Select a criteria to begin
+  <% end %>
 </div>
 
 <div class="clear"></div>
