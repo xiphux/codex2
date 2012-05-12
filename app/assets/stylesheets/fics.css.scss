@@ -61,6 +61,42 @@
 	}
 }
 
+.toccontainer {
+	padding: 5px 5px 5px 5px;
+}
+
+.chaptertable {
+	border-collapse: collapse;
+
+	th {
+		padding: 5px 10px 5px 10px;
+	}
+
+	td {
+		padding: 5px 10px 5px 10px;
+	}
+
+	.chapterheader {
+		text-align: left;
+	}
+	.wordsheader {
+		text-align: right;
+	}
+	.viewsheader {
+		text-align: right;
+	}
+
+	.chaptercolumn {
+		text-align: left;
+	}
+	.wordscolumn {
+		text-align: right;
+	}
+	.viewscolumn {
+		text-align: right;
+	}
+}
+
 @for $i from 1 through 5 {
 
 	$name: nth((
@@ -104,7 +140,16 @@
 			}
 		}
 
-		.main {
+		.chaptertable {
+
+			th {
+				border-bottom: 1px solid darken($bordercolor, 10%);
+			}
+			
+			td {
+				border-top: 1px solid $bordercolor;
+			}
+
 		}
 
 	}

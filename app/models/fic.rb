@@ -24,4 +24,8 @@ class Fic < ActiveRecord::Base
   def word_count
     Chapter.sum(:word_count, :conditions => ["fic_id = ?", id])
   end
+
+  def views
+    Chapter.sum(:views, :conditions => ["fic_id = ?", id])
+  end
 end

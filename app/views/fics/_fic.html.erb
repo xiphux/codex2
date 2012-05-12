@@ -3,7 +3,13 @@
     <%= link_to fic.title, fic =%> by <%= fic.authors.empty? ? "Unknown" : fic.authors.join(", ") =%>
   </div>
   <div class="ficinfo">
-    <%= fic.series.empty? ? "Unknown" : fic.series.join(", ") =%> - <%= fic.genres.empty? ? "Unknown" : fic.genres.join(", ") =%> - Chapters: <%= fic.chapters.count =%> - Words: <%= fic.word_count =%>
+    <%= fic.series.empty? ? "Unknown" : fic.series.join(", ") =%> - <%= fic.genres.empty? ? "Unknown" : fic.genres.join(", ") =%> -
+    <% if fic.chapters.count == 1 %>
+    Views: <%= fic.views =%>
+    <% else %>
+    Chapters: <%= fic.chapters.count =%>
+    <% end %>
+    - Words: <%= fic.word_count =%>
   </div>
   <% if !fic.matchups.empty? %>
   <div class="ficinfo">

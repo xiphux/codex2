@@ -1,16 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="toccontainer">
 
 <%= render(@fic) =%>
 
-<table>
+<table class="chaptertable">
 <tr>
-<th>Chapter</th>
-<th>Words</th>
+<th class="chapterheader">Chapter</th>
+<th class="wordsheader">Words</th>
+<th class="viewsheader">Views</th>
 </tr>
 <% @fic.chapters.each do |chapter| %>
 <tr>
-<td><%= link_to chapter, [@fic, chapter] =%></td>
-<td><%= chapter.word_count =%></td>
+<td class="chaptercolumn"><%= link_to chapter, [@fic, chapter] =%></td>
+<td class="wordscolumn"><%= chapter.word_count =%></td>
+<td class="viewscolumn"><%= chapter.views =%></td>
 </tr>
 <% end %>
 </table>
+
+</div>
