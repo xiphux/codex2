@@ -14,7 +14,7 @@ class FicsController < ApplicationController
 
       # filter search
       if params[:s] || params[:g] || params[:m] then
-        filter_fics = Fic.scoped
+        filter_fics = Fic.includes(:series, :genres, :matchups, :authors).scoped
         if params[:s] then
           for series_id in params[:s] do
 	    filter_fics = filter_fics.with_series(series_id)
@@ -42,7 +42,7 @@ class FicsController < ApplicationController
       # keyword search
       if (params[:search] && !params[:search].blank?) then
 
-	keyword_fics = Fic.scoped
+	keyword_fics = Fic.includes(:series, :genres, :matchups, :authors).scoped
 	for keyword in params[:search].split(' ') do
 	  keyword_fics = keyword_fics.with_keyword_or_author(keyword)
 	end
