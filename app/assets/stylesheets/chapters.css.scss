@@ -27,6 +27,14 @@
 
 }
 
+.topnav {
+	.readnavinfo {
+		div {
+			padding: 3px 0px 3px 0px;
+		}
+	}
+}
+
 .bottomnav {
 	position: fixed;
 	left: 0;
@@ -38,11 +46,10 @@
 	white-space: pre-wrap;
 	padding: 0px 96px 0px 96px;
 	line-height: 1.7em;
-	font-size: 1.1em;
 }
 
 .bottompadding {
-	height: 40px;
+	height: 70px;
 }
 
 .emphasis {
@@ -83,6 +90,10 @@
 
 		.readnav {
 			background-color: $navcolor;
+
+			.appearancesettings {
+				border-top: 1px solid $bordercolor;
+			}
 		}
 
 		.topnav {
@@ -97,6 +108,26 @@
 			border-top: 1px solid $bordercolor;
 		}
 
+	}
+
+}
+
+@for $i from 1 through 3 {
+
+	$name: nth((
+		"small",
+		"medium",
+		"large"
+	), $i);
+
+	$size: nth((
+		1em,
+		1.2em,
+		1.4em
+	), $i);
+
+	.#{$name}_size.readtext {
+		font-size: $size;
 	}
 
 }

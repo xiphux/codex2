@@ -6,6 +6,13 @@ class ChaptersController < ApplicationController
     @chapter.views += 1
     @chapter.save()
 
+    @textsizecookie = cookies[:codex_font_size] || "medium"
+    @textsizes = {
+    	:small => "Small",
+	:medium => "Medium",
+	:large => "Large"
+    }
+
     respond_to do |format|
       format.html
     end

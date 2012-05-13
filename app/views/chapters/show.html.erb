@@ -6,14 +6,18 @@
   </span>
   <% end %>
 
-  <span class="readnavinfo">
+  <div class="readnavinfo">
+    <div>
   <%= @fic.title =%> <span class="label">by</span> <%= @fic.authors.join(", ") || "Unknown" =%>
   <% if @fic.chapters.count > 1 %>
   | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c, c.number ] }, { :selected => @chapter.number }, { :id => "topchapterselect" }) =%>
     <%= hidden_field(:fic, :id) =%>
   <% end %>
-  | Theme: <%= select("theme", "key", @themes.collect { |key, name| [ name, key ] }, { :selected => @themecookie }, { :id => "themeselect" }) =%>
-  </span>
+    </div>
+    <div class="appearancesettings">
+    Theme: <%= select("theme", "key", @themes.collect { |key, name| [ name, key ] }, { :selected => @themecookie }, { :id => "themeselect" }) =%> | Size: <%= select("text", "size", @textsizes.collect { |key, name| [ name, key ] }, { :selected => @textsizecookie }, { :id => "textsizeselect" }) =%>
+    </div>
+  </div>
 
   <% if @chapter != @fic.chapters.last %>
   <span class="readnavnext">
@@ -23,7 +27,7 @@
 
 </div>
 
-<div class="readtext">
+<div class="readtext <%= @textsizecookie =%>_size">
 <%= format_text(@chapter.text, {:unwrap => @chapter.wrapped, :padlines => @chapter.padlines}) =%>
 </div>
 
