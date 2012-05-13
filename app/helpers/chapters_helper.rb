@@ -37,18 +37,18 @@ module ChaptersHelper
       # might be unwrappable by using the ending space
       # as an indication of text continuing on the next line
       unwrapped_text = text.gsub(/ \n/, " ")
-    elsif (indented_line_count / content_line_count) > 0.20 then
+    elsif (indented_line_count.to_f / content_line_count.to_f) > 0.20 then
       # text appears to have a number of indented lines
       # try to use indents to find paragraphs
       unwrapped_text = text.gsub(/ *\n(\S)/) { |match| " " + $1 }
-    elsif (((line_count - content_line_count) / line_count) > 0.10) then
+    elsif (((line_count - content_line_count).to_f / line_count.to_f) > 0.10) then
       # text appears to have a number of blank lines
       # try to use blank lines to find paragraphs
       unwrapped_text = text.gsub(/([^\n]) *\n([^\r\s])/) { |match| $1 + " " + $2 }
     elsif (average_length > 1) then
       # try to unwrap by guessing the width of lines
       regex = Regexp.new("([^\n]{" + average_length.to_i.to_s + ",})\n")
-      unwrapped_text = text.gsub(regex) { |match| $1 }
+      unwrapped_text = text.gsub(regex) { |match| $1 + " " }
       unwrapped_text = unwrapped_text.gsub(/([\w,]) {2,}([\w,])/) { |match| $1 + " " + $2 }
     end
 
