@@ -5,6 +5,6 @@ class Author < ActiveRecord::Base
   scope :with_keyword, lambda { |keyword| keyword.present? ? {:conditions => ["authors.name LIKE ?", "%" + keyword + "%"]} : {} }
 
   def to_s
-    self.name
+    self.name || self.email
   end
 end
