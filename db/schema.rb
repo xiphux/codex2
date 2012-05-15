@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120512040754) do
+ActiveRecord::Schema.define(:version => 20120515034255) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(:version => 20120512040754) do
     t.string   "file"
     t.boolean  "wrapped"
     t.boolean  "padlines"
-    t.integer  "views"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.integer  "views",                            :default => 0, :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.integer  "word_count"
   end
 
