@@ -200,7 +200,7 @@ class LegacyChapter < ActiveRecord::Base
   attr_accessible :fic, :num, :title, :file, :data, :wrapped, :padlines, :views
 
   def migrate!
-    chapter = Chapter.new :number => self.num, :title => self.title, :file => self.file, :data => self.data, :wrapped => self.wrapped, :padlines => self.padlines, :views => self.views
+    chapter = Chapter.new :number => self.num, :title => self.title, :file => self.file, :data => self.data, :wrapped => self.wrapped, :no_paragraph_spacing => self.padlines, :views => self.views
     chapter.id = self.id
     chapter.word_count = chapter.calculate_word_count
 

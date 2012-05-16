@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120515034255) do
+ActiveRecord::Schema.define(:version => 20120516000047) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -32,13 +32,13 @@ ActiveRecord::Schema.define(:version => 20120515034255) do
     t.integer  "fic_id"
     t.integer  "number"
     t.string   "title"
-    t.text     "data",       :limit => 2147483647
+    t.text     "data",                 :limit => 2147483647
     t.string   "file"
     t.boolean  "wrapped"
-    t.boolean  "padlines"
-    t.integer  "views",                            :default => 0, :null => false
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.boolean  "no_paragraph_spacing"
+    t.integer  "views",                                      :default => 0, :null => false
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
     t.integer  "word_count"
   end
 

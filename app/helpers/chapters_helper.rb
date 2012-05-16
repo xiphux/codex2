@@ -87,7 +87,7 @@ module ChaptersHelper
     end
 
     # pad dense text with extra space
-    if options[:padlines] == true then
+    if options[:pad_lines] == true then
       formatted.gsub!(/([^\w\s,]) *\n([A-Z\t\"]| {3,})/) { |match| $1 + "\n\n" + $2 }
     end
 

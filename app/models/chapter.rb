@@ -1,6 +1,6 @@
 class Chapter < ActiveRecord::Base
   belongs_to :fic
-  attr_accessible :data, :file, :number, :padlines, :title, :wrapped, :word_count, :views
+  attr_accessible :data, :file, :number, :no_paragraph_spacing, :title, :wrapped, :word_count, :views
   default_scope select((column_names - ['data']).map { |column_name| "`#{table_name}`.`#{column_name}`"})
 
   def title

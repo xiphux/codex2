@@ -28,7 +28,7 @@
 </div>
 
 <div class="readtext <%= @textsizecookie =%>_size">
-<%= format_text(@chapter.text, {:unwrap => @chapter.wrapped, :padlines => @chapter.padlines}) =%>
+<%= format_text(@chapter.text, {:unwrap => @chapter.wrapped, :pad_lines => @chapter.no_paragraph_spacing}) =%>
 </div>
 
 <div class="bottompadding">
