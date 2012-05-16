@@ -52,6 +52,9 @@ module ChaptersHelper
       unwrapped_text = unwrapped_text.gsub(/([\w,]) {2,}([\w,])/) { |match| $1 + " " + $2 }
     end
 
+    # preserve breaklines that may have accidentally been wrapped up
+    unwrapped_text.gsub!(/(?<prebreak>[^\*\-=\~_<>\^A-Z])(?<break>(([\*\-=\~_<>\^]) ?){3,})(?<postbreak>[^\*\-=\~_<>\^A-Z])/) { |match| $~[:prebreak] + "\n" + $~[:break] + "\n" + $~[:postbreak] }
+
     unwrapped_text
   end
 
@@ -59,7 +62,7 @@ module ChaptersHelper
     stylized = text.dup
 
     # stylize breaking lines
-    stylized.gsub!(/\s*\n([\s\n])*(([\*\-=\~_<>]) ?){2,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
+    stylized.gsub!(/\s*\n([\s\n])*(([\*\-=\~_<>\^]) ?){3,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
 
     # stylize underscore emphasis
     stylized.gsub!(/(\W)_(\S+?)_(\W)/) { |match| $1 + '<span class="emphasis">' + $2 + '</span>' + $3 }
@@ -81,14 +84,31 @@ module ChaptersHelper
     # use unix line breaks
     formatted.gsub!(/\r\n/, "\n")
 
-    # unwrap lines
-    if options[:unwrap] == true then
-      formatted = unwrap(formatted)
-    end
+    # strip double line breaks
+    if options[:strip_double_line_breaks] == true then
 
-    # pad dense text with extra space
-    if options[:pad_lines] == true then
+      formatted.gsub!(/\n\n/, "\n")
+
+      # pad dense text with extra space since we stripped them
       formatted.gsub!(/([^\w\s,]) *\n([A-Z\t\"]| {3,})/) { |match| $1 + "\n\n" + $2 }
+
+      # unwrap lines
+      if options[:unwrap] == true then
+        formatted = unwrap(formatted)
+      end
+
+    else
+
+      # unwrap lines
+      if options[:unwrap] == true then
+        formatted = unwrap(formatted)
+      end
+
+      # pad dense text with extra space
+      if options[:pad_lines] == true then
+        formatted.gsub!(/([^\w\s,]) *\n([A-Z\t\"]| {3,})/) { |match| $1 + "\n\n" + $2 }
+      end
+
     end
 
     # compact extra whitespace lines
