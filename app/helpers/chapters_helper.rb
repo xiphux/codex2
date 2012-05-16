@@ -53,7 +53,7 @@ module ChaptersHelper
     end
 
     # preserve breaklines that may have accidentally been wrapped up
-    unwrapped_text.gsub!(/(?<prebreak>[^\*\-=\~_<>\^A-Z])(?<break>(([\*\-=\~_<>\^]) ?){3,})(?<postbreak>[^\*\-=\~_<>\^A-Z])/) { |match| $~[:prebreak] + "\n" + $~[:break] + "\n" + $~[:postbreak] }
+    unwrapped_text.gsub!(/([^\*\-=\~_<>\^A-Z])((([\*\-=\~_<>\^]) ?){3,})([^\*\-=\~_<>\^A-Z])/) { |match| $1 + "\n" + $2 + "\n" + $5 }
 
     unwrapped_text
   end
