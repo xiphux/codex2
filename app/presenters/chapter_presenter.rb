@@ -35,7 +35,7 @@ class ChapterPresenter
 
     average_length = (character_count / content_line_count).to_i
 
-    space_to_line_ratio = space_ended_line_count / content_line_count
+    space_to_line_ratio = space_ended_line_count.to_f / content_line_count.to_f
 
     unwrapped_text = text
 
