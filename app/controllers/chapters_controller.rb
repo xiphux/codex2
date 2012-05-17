@@ -5,6 +5,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.select(:data).find(:first, :conditions => { :fic_id => params[:fic_id], :number => params[:id] })
     @chapter.views += 1
     @chapter.save()
+    @chapter_presenter = ChapterPresenter.new(@chapter)
 
     @textsizecookie = cookies[:codex_font_size] || "medium"
     @textsizes = {
