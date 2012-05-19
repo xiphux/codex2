@@ -47,8 +47,13 @@
 	position: fixed;
 	left: 0;
 	top: 0;
-	padding: 130px 0px 0px 0px;
+	padding: 86px 0px 0px 0px;
 	text-align: center;
+
+	.sidebar_section {
+		padding: 10px 0px 10px 0px;
+	}
+
 }
 
 .appearance_popup, .spelling_popup {
@@ -67,7 +72,7 @@
 
 .readtext {
 	white-space: pre-wrap;
-	padding: 35px 96px 70px 121px;
+	padding: 50px 96px 70px 121px;
 	line-height: 1.7em;
 }
 

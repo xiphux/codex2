@@ -10,7 +10,7 @@
     <div>
   <%= @fic.title =%> <span class="label">by</span> <%= @fic.authors.join(", ") || "Unknown" =%>
   <% if @fic.chapters.count > 1 %>
-  | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c, c.number ] }, { :selected => @chapter.number }, { :id => "topchapterselect" }) =%>
+  <br /> <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c, c.number ] }, { :selected => @chapter.number }, { :id => "topchapterselect" }) =%>
     <%= hidden_field(:fic, :id) =%>
   <% end %>
     </div>
@@ -25,7 +25,8 @@
 </div>
 
 <div class="chapter_sidebar">
-<input type="button" value="Aa" id="appearance_button" />
+<div class="sidebar_section">
+<input type="button" value="Aa" id="appearance_button" class="sidebar_button" />
   <div class="appearance_popup">
     <table>
       <tr>
@@ -38,9 +39,9 @@
       </tr>
     </table>
   </div>
-<br />
-<br />
-<input type="button" value="Sp" id="spelling_button" />
+</div>
+<div class="sidebar_section">
+<input type="button" value="Sp" id="spelling_button" class="sidebar_button" />
   <div class="spelling_popup">
     <%= form_tag({ :action => :add_transform }, { :method => :post, :id => :spelling_form }) =%>
     <table>
@@ -59,6 +60,7 @@
     </table>
   </div>
 </div>
+</div>
 
 <div class="readtext <%= @textsizecookie =%>_size">
 <%= @chapter_presenter.content =%>
@@ -75,9 +77,7 @@
 
   <span class="readnavinfo">
   <%= @fic.title =%> <span class="label">by</span> <%= @fic.authors.join(", ") || "Unknown" =%>
-  <% if @fic.chapters.count > 1 %>
-    | <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c, c.number ] }, { :selected => @chapter.number }, { :id => "bottomchapterselect" }) =%>
-  <% end %>
+  <br /> <%= select("@chapter", "number", @fic.chapters.collect {|c| [ c, c.number ] }, { :selected => @chapter.number }, { :id => "bottomchapterselect" }) =%>
   </span>
 
   <% if @chapter != @fic.chapters.last %>
