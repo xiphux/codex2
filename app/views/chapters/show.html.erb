@@ -2,7 +2,7 @@
 
   <% if @chapter != @fic.chapters.first %>
   <span class="readnavprev">
-    <%= link_to "< prev", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)-1]] =%>
+    <%= link_to "< prev", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)-1]], :class => :button =%>
   </span>
   <% end %>
 
@@ -18,7 +18,7 @@
 
   <% if @chapter != @fic.chapters.last %>
   <span class="readnavnext">
-    <%= link_to "next >", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)+1]] =%>
+    <%= link_to "next >", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)+1]], :class => :button =%>
   </span>
   <% end %>
 
@@ -71,7 +71,7 @@
 
   <% if @chapter != @fic.chapters.first %>
   <span class="readnavprev">
-    <%= link_to "< prev", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)-1]] =%>
+    <%= link_to "< prev", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)-1]], :class => :button =%>
   </span>
   <% end %>
 
@@ -82,7 +82,7 @@
 
   <% if @chapter != @fic.chapters.last %>
   <span class="readnavnext">
-    <%= link_to "next >", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)+1]] =%>
+    <%= link_to "next >", [@fic, @fic.chapters[@fic.chapters.find_index(@chapter)+1]], :class => :button =%>
   </span>
   <% end %>
 

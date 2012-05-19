@@ -3,16 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //= require jquery.qtip
 
+a.button {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	padding: 0px 5px 0px 5px;
+}
+
 .readnav {
 	width: 100%;
 	text-align: center;
 	padding: 4px 2px 4px 2px;
+	vertical-align: middle;
 
 	.readnavprev {
 		text-align: left;
 		position: absolute;
-		left: 0;
-		top: 0;
+		left: 18px;
+		top: 50%;
+		margin: -15px;
 	}
 
 	.readnavinfo {
@@ -22,8 +31,9 @@
 	.readnavnext {
 		text-align: right;
 		position: absolute;
-		right: 0;
-		top: 0;
+		right: 22px;
+		top: 50%;
+		margin: -15px;
 	}
 
 }
@@ -52,6 +62,10 @@
 
 	.sidebar_section {
 		padding: 10px 0px 10px 0px;
+
+		a.button {
+			width: 20px;
+		}
 	}
 
 }
@@ -82,13 +96,6 @@
 
 .breakline {
 	margin: 48px 0px 48px 0px;
-}
-
-a.button {
-	display: inline-block;
-	height: 30px;
-	width: 30px;
-	line-height: 30px;
 }
 
 @for $i from 1 through 5 {
