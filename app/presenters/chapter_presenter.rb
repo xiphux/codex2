@@ -96,6 +96,10 @@ class ChapterPresenter
       # use unix line breaks
       text.gsub!(/\r\n/, "\n")
 
+      # strip leading and trailing whitespace and breaks
+      text.sub!(/^[\s\n]+/, "")
+      text.sub!(/\[s\n]+$/, "")
+
       # strip double line breaks
       if @chapter.double_line_breaks then
 
