@@ -30,6 +30,8 @@ $ ->
         style:
           classes: 'codex-tooltip label ui-tooltip-shadow ui-tooltip-rounded'
       })
+    appearance_button.click (event) ->
+      return false;
   spelling_button = $('#spelling_button')
   if spelling_button.length > 0 && sidebar.length > 0
     spelling_button.qtip({
@@ -57,6 +59,8 @@ $ ->
             $('#spelling_original').val('')
             $('#spelling_replacement').val('')
       })
+    spelling_button.click (event) ->
+      return false
     $('#spelling_form').submit (event) ->
       original = $('#spelling_original').val()
       if original && original.length > 0
