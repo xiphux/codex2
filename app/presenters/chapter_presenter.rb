@@ -100,6 +100,15 @@ class ChapterPresenter
       text.sub!(/^[\s\n]+/, "")
       text.sub!(/\[s\n]+$/, "")
 
+      @chapter.text_transforms.each do |transform|
+      	if !transform.pattern.blank? then
+	  regex = Regexp.new(transform.pattern)
+	  if regex then
+	    text.gsub!(regex, transform.replacement)
+	  end
+	end
+      end
+
       # strip double line breaks
       if @chapter.double_line_breaks then
 
