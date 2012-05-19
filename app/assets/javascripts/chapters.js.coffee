@@ -6,6 +6,7 @@ $ ->
   $('#topchapterselect, #bottomchapterselect').change (event) ->
     chapter = $(event.target).val()
     window.location.href = "/fics/" + $('#fic_id').val() + "/chapters/" + chapter
+  isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)
   appearance_button = $('#appearance_button')
   sidebar = $('.chapter_sidebar')
   appearance_button.qtip({
@@ -22,7 +23,10 @@ $ ->
         target: [sidebar.position().left + sidebar.width(), appearance_button.position().top + (appearance_button.height()/2)]
       },
       show: {
-        event: 'click'
+        event: 'click',
+        modal: {
+          on: isMobile
+        }
       },
       hide: {
         fixed: true,

@@ -61,6 +61,10 @@
 	position: fixed;
 }
 
+#qtip-overlay div {
+	background-color: transparent !important;
+}
+
 .readtext {
 	white-space: pre-wrap;
 	padding: 35px 96px 70px 121px;
