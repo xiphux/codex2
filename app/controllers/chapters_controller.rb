@@ -19,4 +19,12 @@ class ChaptersController < ApplicationController
     end
   end
 
+  def add_transform
+    @chapter = Chapter.find(:first, :conditions => { :fic_id => params[:fic_id], :number => params[:id] })
+    if params[:spelling_original] && !params[:spelling_original].blank? then
+      @chapter.text_transforms.create(:pattern => "\\b" + params[:spelling_original] + "\\b", :replacement => params[:spelling_replacement])
+    end
+    redirect_to :action => "show"
+  end
+
 end

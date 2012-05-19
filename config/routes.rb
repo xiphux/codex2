@@ -1,4 +1,5 @@
 Codex::Application.routes.draw do
+  match 'fics/:fic_id/chapters/:id/add_transform' => 'chapters#add_transform', :via => :post
   resources :fics do
   	resources :chapters
   end

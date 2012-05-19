@@ -38,6 +38,26 @@
       </tr>
     </table>
   </div>
+<br />
+<br />
+<input type="button" value="Sp" id="spelling_button" />
+  <div class="spelling_popup">
+    <%= form_tag({ :action => :add_transform }, { :method => :post, :id => :spelling_form }) =%>
+    <table>
+      <tr>
+        <td>Original:</td>
+        <td><input type="text" name="spelling_original" id="spelling_original" /></td>
+      </tr>
+      <tr>
+	<td>Replacement:</td>
+	<td><input type="text" name="spelling_replacement" id="spelling_replacement" /></td>
+      </tr>
+      <tr>
+        <td></td>
+	<td><input type="submit" value="Set" id="spelling_set" /></td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 <div class="readtext <%= @textsizecookie =%>_size">
