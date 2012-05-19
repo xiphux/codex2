@@ -57,6 +57,8 @@
 
 .codex-tooltip {
 	font-size: 14px;
+	background-color: inherit;
+	position: fixed;
 }
 
 .readtext {
@@ -124,7 +126,10 @@
 
 		.codex-tooltip {
 			border-color: $bordercolor;
-			background-color: $navcolor;
+
+			.ui-tooltip-titlebar {
+				background-color: $navcolor;
+			}
 		}
 
 	}

@@ -6,13 +6,20 @@ $ ->
   $('#topchapterselect, #bottomchapterselect').change (event) ->
     chapter = $(event.target).val()
     window.location.href = "/fics/" + $('#fic_id').val() + "/chapters/" + chapter
-  $('#appearance_button').qtip({
+  appearance_button = $('#appearance_button')
+  sidebar = $('.chapter_sidebar')
+  appearance_button.qtip({
       content: {
-        text: $('.appearance_popup')
+        text: $('.appearance_popup'),
+        title: {
+          text: 'Appearance',
+          button: true
+        }
       },
       position: {
         my: 'left center',
-        at: 'right center'
+        at: 'right center',
+        target: [sidebar.position().left + sidebar.width(), appearance_button.position().top + (appearance_button.height()/2)]
       },
       show: {
         event: 'click'
