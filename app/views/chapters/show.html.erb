@@ -14,9 +14,6 @@
     <%= hidden_field(:fic, :id) =%>
   <% end %>
     </div>
-    <div class="appearancesettings">
-    Theme: <%= select("theme", "key", @themes.collect { |key, name| [ name, key ] }, { :selected => @themecookie }, { :id => "themeselect" }) =%> | Size: <%= select("text", "size", @textsizes.collect { |key, name| [ name, key ] }, { :selected => @textsizecookie }, { :id => "textsizeselect" }) =%>
-    </div>
   </div>
 
   <% if @chapter != @fic.chapters.last %>
@@ -27,11 +24,24 @@
 
 </div>
 
-<div class="readtext <%= @textsizecookie =%>_size">
-<%= @chapter_presenter.content =%>
+<div class="chapter_sidebar">
+<input type="button" value="Aa" id="appearance_button" />
+  <div class="appearance_popup">
+    <table>
+      <tr>
+        <td>Theme:</td>
+	<td><%= select("theme", "key", @themes.collect { |key, name| [ name, key ] }, { :selected => @themecookie }, { :id => "themeselect" }) =%></td>
+      </tr>
+      <tr>
+        <td>Size:</td>
+	<td><%= select("text", "size", @textsizes.collect { |key, name| [ name, key ] }, { :selected => @textsizecookie }, { :id => "textsizeselect" }) =%></td>
+      </tr>
+    </table>
+  </div>
 </div>
 
-<div class="bottompadding">
+<div class="readtext <%= @textsizecookie =%>_size">
+<%= @chapter_presenter.content =%>
 </div>
 
 <% if @fic.chapters.count > 1 %>

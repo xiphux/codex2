@@ -1,6 +1,7 @@
 // Place all the styles related to the Chapters controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+//= require jquery.qtip
 
 .readnav {
 	width: 100%;
@@ -28,11 +29,8 @@
 }
 
 .topnav {
-	.readnavinfo {
-		div {
-			padding: 3px 0px 3px 0px;
-		}
-	}
+	position: absolute;
+	z-index: 5;
 }
 
 .bottomnav {
@@ -42,14 +40,29 @@
 	z-index: 5;
 }
 
-.readtext {
-	white-space: pre-wrap;
-	padding: 0px 96px 0px 96px;
-	line-height: 1.7em;
+.chapter_sidebar {
+	width: 50px;
+	min-height: 100%;
+	float: left;
+	position: fixed;
+	left: 0;
+	top: 0;
+	padding: 130px 0px 0px 0px;
+	text-align: center;
 }
 
-.bottompadding {
-	height: 70px;
+.appearance_popup {
+	display: none;
+}
+
+.codex-tooltip {
+	font-size: 14px;
+}
+
+.readtext {
+	white-space: pre-wrap;
+	padding: 35px 96px 70px 121px;
+	line-height: 1.7em;
 }
 
 .emphasis {
@@ -90,10 +103,6 @@
 
 		.readnav {
 			background-color: $navcolor;
-
-			.appearancesettings {
-				border-top: 1px solid $bordercolor;
-			}
 		}
 
 		.topnav {
@@ -104,8 +113,18 @@
 			border-top: 2px solid $bordercolor;
 		}
 
+		.chapter_sidebar {
+			background-color: $navcolor;
+			border-right: 2px solid $bordercolor;
+		}
+
 		.breakline {
 			border-top: 1px solid $bordercolor;
+		}
+
+		.codex-tooltip {
+			border-color: $bordercolor;
+			background-color: $navcolor;
 		}
 
 	}
