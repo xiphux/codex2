@@ -22,7 +22,7 @@ class AdminController < ApplicationController
 
     TextTransform.delete_all("chapter_id IS NULL OR chapter_id not in (SELECT id FROM chapters)")
 
-    @chapters = Chapter.all
+    @chapters = Chapter.select(:data).all
     @chapters.each do |chapter|
 
     	next if chapter.text_transforms.count < 1
@@ -38,6 +38,19 @@ class AdminController < ApplicationController
 
 	  if chapter_patterns.has_key?(transform.pattern) then
 	    # duplicate
+	    transform.delete
+	    next
+	  end
+
+	  regex = Regexp.new(transform.pattern)
+	  if !regex then
+	    # invalid pattern
+	    transform.delete
+	    next
+	  end
+
+	  if !regex.match(chapter.text) then
+	    # useless pattern
 	    transform.delete
 	    next
 	  end
