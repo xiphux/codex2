@@ -98,7 +98,7 @@ class ChapterPresenter
 
       # strip leading and trailing whitespace and breaks
       text.sub!(/^[\s\n]+/, "")
-      text.sub!(/\[s\n]+$/, "")
+      text.sub!(/[\s\n]+$/, "")
 
       @chapter.text_transforms.each do |transform|
       	if !transform.pattern.blank? then
