@@ -5,6 +5,7 @@ Codex::Application.routes.draw do
   end
 
   match "admin/update_word_counts" => "admin#update_word_counts", :via => :post
+  match "admin/prune_text_transforms" => "admin#prune_text_transforms", :via => :post
   resources :admin
 
   root :to => 'fics#index'

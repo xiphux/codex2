@@ -17,4 +17,36 @@ class AdminController < ApplicationController
 
     redirect_to :action => "index"
   end
+
+  def prune_text_transforms
+
+    TextTransform.delete_all("chapter_id IS NULL OR chapter_id not in (SELECT id FROM chapters)")
+
+    @chapters = Chapter.all
+    @chapters.each do |chapter|
+
+    	next if chapter.text_transforms.count < 1
+
+	chapter_patterns = Hash.new
+
+	chapter.text_transforms.each do |transform|
+	  if transform.pattern == nil || transform.pattern.blank? then
+	    # empty
+	    transform.delete
+	    next
+	  end
+
+	  if chapter_patterns.has_key?(transform.pattern) then
+	    # duplicate
+	    transform.delete
+	    next
+	  end
+
+	  chapter_patterns[transform.pattern] = 1
+	end
+
+    end
+
+    redirect_to :action => "index"
+  end
 end
