@@ -67,7 +67,7 @@ $ ->
         $.post this.action, $(this).serialize(), (response) ->
           replacement = $('#spelling_replacement').val()
           textcontainer = $('.readtext')
-          regex = new RegExp("\\b" + original + "\\b")
+          regex = new RegExp("\\b" + original + "\\b", "g")
           textcontainer.html(textcontainer.html().replace(regex, replacement))
           $('#spelling_button').qtip('hide')
       return false
