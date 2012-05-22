@@ -34,6 +34,20 @@ $ ->
       return false;
   spelling_button = $('#spelling_button')
   if spelling_button.length > 0 && sidebar.length > 0
+    getSelected = () ->
+      if window.getSelection
+        t = window.getSelection()
+      else if document.getSelection
+        t = document.getSelection()
+      else if document.selection
+        t = document.selection.createRange().text
+      return t
+    textToSpelling = () ->
+      t = getSelected()
+      if t && /\S/.test(t)
+        $('#spelling_original').val(t)
+      else
+        $('#spelling_original').val('')
     spelling_button.qtip({
         content:
           text: $('.spelling_popup')
@@ -58,6 +72,9 @@ $ ->
           hide: (event, api) ->
             $('#spelling_original').val('')
             $('#spelling_replacement').val('')
+          show: (event, api) ->
+            if !isMobile
+              textToSpelling()
       })
     spelling_button.click (event) ->
       return false
@@ -71,4 +88,11 @@ $ ->
           textcontainer.html(textcontainer.html().replace(regex, replacement))
           $('#spelling_button').qtip('hide')
       return false
+    $('.readtext').dblclick (event) ->
+      t = getSelected()
+      if t && /\S/.test(t)
+        spelling_button.qtip('show')
+    $('.readtext').bind 'touchend', (event) ->
+      textToSpelling()
+
 
