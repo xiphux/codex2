@@ -65,12 +65,13 @@ class ChapterPresenter
       text.gsub!(/([\w,]) {2,}([\w,])/) { |match| $1 + " " + $2 }
     end
 
+    # preserve breaklines that may have accidentally been wrapped up
+    text.gsub!(/([^\*\-=\~_<>\^`#\$@A-Za-z])((([\*\-=\~_<>#\^`\$@]) ?){4,})([^\*\-=\~_<>#\^`\$@])/) { |match| $1 + "\n" + $2 + "\n" + $5 }
   end
 
   def stylize!(text)
     # stylize breaking lines
-    text.gsub!(/\s*\n([\s\n])*(([\*\-=\~_<>\^`#\$@]) ?){2,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
-    text.gsub!(/([\s\n])*(([\*\-=\~_<>\^`#\$@]) ?){5,}([\s\n])*/, "<div class=\"breakline\"></div>")
+    text.gsub!(/\s*\n([\s\n])*(([\*\-=\~_<>\^`#\$@]) ?){3,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
 
     # stylize underscore emphasis
     text.gsub!(/(\W)_(\S+?)_(\W)/) { |match| $1 + '<span class="emphasis">' + $2 + '</span>' + $3 }
