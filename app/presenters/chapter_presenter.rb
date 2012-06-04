@@ -1,8 +1,5 @@
 class ChapterPresenter
 
-  include ActionView::Helpers::SanitizeHelper
-  extend ActionView::Helpers::SanitizeHelper::ClassMethods
-
   def initialize(chapter)
     @chapter = chapter
   end
@@ -71,7 +68,7 @@ class ChapterPresenter
 
   def stylize!(text)
     # stylize breaking lines
-    text.gsub!(/\s*\n([\s\n])*(([\*\-=\~_<>\^`#\$@]) ?){3,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
+    text.gsub!(/\s*\n([\s\n])*((([\*\-=\~_\^`#\$@])|&lt;|&gt;) ?){3,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
 
     # stylize underscore emphasis
     text.gsub!(/(\W)_(\S+?)_(\W)/) { |match| $1 + '<span class="emphasis">' + $2 + '</span>' + $3 }
@@ -139,11 +136,11 @@ class ChapterPresenter
       # compact extra whitespace lines
       compact_blank_lines!(text)
 
+      # escape html entities
+      text = ERB::Util.html_escape(text)
+
       # convert text styles into html styles
       stylize!(text)
-
-      # sanitize html excluding stylized tags
-      text = sanitize(text, :tags => %w(div span sup))
 
       # convert line breaks to html breaks
       #text = simple_format(text, {}, :sanitize => false)
