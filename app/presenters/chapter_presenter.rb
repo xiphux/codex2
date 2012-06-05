@@ -63,18 +63,18 @@ class ChapterPresenter
     end
 
     # preserve breaklines that may have accidentally been wrapped up
-    text.gsub!(/([^\*\-=\~_<>\^`#\$@A-Za-z])((([\*\-=\~_<>#\^`\$@]) ?){4,})([^\*\-=\~_<>#\^`\$@])/) { |match| $1 + "\n" + $2 + "\n" + $5 }
+    text.gsub!(/([^\*\-=\~_\^`#\$@A-Za-z])((([\*\-=\~_#\^`\$@]) ?){4,})([^\*\-=\~_#\^`\$@])/) { |match| $1 + "\n" + $2 + "\n" + $5 }
   end
 
   def stylize!(text)
     # stylize breaking lines
-    text.gsub!(/\s*\n([\s\n])*((([\*\-=\~_\^`#\$@])|&lt;|&gt;) ?){3,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
+    text.gsub!(/\s*\n([\s\n])*(([\*\-=\~_\^`#\$@]) ?){3,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
 
     # stylize underscore emphasis
     text.gsub!(/(\W)_(\S+?)_(\W)/) { |match| $1 + '<span class="emphasis">' + $2 + '</span>' + $3 }
 
     # stylize asterisk emphasis
-    text.gsub!(/([^\*])(\*{1,2})([^\*>\n]*)(\*{1,2})([^\*])/) { |match| $1 + $2 + '<span class="emphasis">' + $3 + '</span>' + $4 + $5 }
+    text.gsub!(/([^\*])(\*{1,2})([^\*>\n]*)(\*{1,2})([^\*])/) { |match| ($1 || "") + ($2 || "") + '<span class="emphasis">' + ($3 || "") + '</span>' + ($4 || "") + ($5 || "") }
 
     # stylize trademark symbol
     text.gsub!(/\^?\(TM\)/i, "<sup>TM</sup>")
