@@ -71,10 +71,10 @@ class ChapterPresenter
     text.gsub!(/\s*\n([\s\n])*(([\*\-=\~_\^`#\$@]) ?){3,}([\s\n])*\n/, "<div class=\"breakline\"></div>")
 
     # stylize underscore emphasis
-    text.gsub!(/(\W)_(\S+?)_(\W)/) { |match| $1 + '<span class="emphasis">' + $2 + '</span>' + $3 }
+    text.gsub!(/(\W)_(\S+?)_(\W)/, '\1<span class="emphasis">\2</span>\3')
 
     # stylize asterisk emphasis
-    text.gsub!(/([^\*])(\*{1,2})([^\*>\n]*)(\*{1,2})([^\*])/) { |match| ($1 || "") + ($2 || "") + '<span class="emphasis">' + ($3 || "") + '</span>' + ($4 || "") + ($5 || "") }
+    text.gsub!(/([^\*])(\*{1,2})([^\*>\n]*)(\*{1,2})([^\*])/, '\1\2<span class="emphasis">\3</span>\4\5')
 
     # stylize trademark symbol
     text.gsub!(/\^?\(TM\)/i, "<sup>TM</sup>")
