@@ -42,21 +42,29 @@ class ChapterPresenter
 
     space_to_line_ratio = space_ended_line_count.to_f / content_line_count.to_f
 
-    if space_to_line_ratio > 0.6 && space_to_line_ratio < 0.98 then
+    if space_to_line_ratio > 0.6 && space_to_line_ratio < 0.95 then
       # text has lots of lines that end in spaces
       # might be unwrappable by using the ending space
       # as an indication of text continuing on the next line
+      #Rails.logger.debug "Unwrapping using ending spaces"
+      #Rails.logger.debug "Space to line ratio: " + space_to_line_ratio.to_s
       text.gsub!(/ \n/, " ")
     elsif (indented_line_count.to_f / content_line_count.to_f) > 0.20 then
       # text appears to have a number of indented lines
       # try to use indents to find paragraphs
+      #Rails.logger.debug "Unwrapping using indented lines"
+      #Rails.logger.debug "Indented line ratio: " + (indented_line_count.to_f / content_line_count.to_f).to_s
       text.gsub!(/ *\n(\S)/) { |match| " " + $1 }
     elsif (((line_count - content_line_count).to_f / line_count.to_f) > 0.10) then
       # text appears to have a number of blank lines
       # try to use blank lines to find paragraphs
+      #Rails.logger.debug "Unwrapping using blank lines"
+      #Rails.logger.debug "Blank line ratio: " + ((line_count - content_line_count).to_f / line_count.to_f).to_s
       text.gsub!(/([^\n]) *\n([^\r\s])/) { |match| $1 + " " + $2 }
     elsif (average_length > 1) then
       # try to unwrap by guessing the width of lines
+      #Rails.logger.debug "Unwrapping using line widths"
+      #Rails.logger.debug "Average line width: " + average_length.to_s
       regex = Regexp.new("([^\n]{" + average_length.to_i.to_s + ",})\n")
       text.gsub!(regex) { |match| $1 + " " }
       text.gsub!(/([\w,]) {2,}([\w,])/) { |match| $1 + " " + $2 }
